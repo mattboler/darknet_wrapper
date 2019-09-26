@@ -42,10 +42,10 @@ endif()
 ###############################################################################
 
 if(NOT DEFINED OpenCV_INCLUDE_DIRS)
-  find_package(OpenCV 4.1.0 REQUIRED)
+  find_package(OpenCV 4.0.0 REQUIRED)
 elseif(NOT ${OpenCV_VERSION_MAJOR} STREQUAL "4")
   message(WARNING "OpenCV 4 is required, but opencv${OpenCV_VERSION_MAJOR} has been previously pulled in.. could cause conflicts")
-  find_package(OpenCV 4.1.0 REQUIRED)
+  find_package(OpenCV 4.0.0 REQUIRED)
 endif()
 
 include_directories(${OpenCV_INCLUDE_DIRS})

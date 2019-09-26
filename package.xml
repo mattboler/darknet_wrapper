@@ -2,11 +2,11 @@
 <package format="3">
   <name>darknet_wrapper</name>
   <version>0.0.0</version>
-  <description>common repository containing a wrapper around Darknet</description>
+  <description>Repository containing a wrapper around Darknet</description>
 
   <maintainer email="meb0054@auburn.edu">Matt Boler</maintainer>
 
-  <license>Proprietary</license>
+  <license>Open Source</license>
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
