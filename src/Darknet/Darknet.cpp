@@ -77,31 +77,10 @@ vector<pair<string, cv::Rect> > Darknet::Predict(const cv::Mat& image)
   net.setInput(inputBlob, "data");
 
   // Run the network
-  cv::Mat detectionMat = net.forward("detection_out");
+  std::vector<cv::String> outNames = net.getUnconnectedOutLayersNames();
+  std::vector<cv::Mat> outs;
 
-  for (int i = 0; i < detectionMat.rows; i++)
-  {
-    const int probability_index = 5;
-    const int probability_size = detectionMat.cols - probability_index;
-    float *prob_array_ptr = &detectionMat.at<float>(i, probability_index);
-
-    size_t objectClass = max_element(prob_array_ptr, prob_array_ptr+probability_size)-prob_array_ptr;
-    float confidence = detectionMat.at<float>(i, (int)objectClass + probability_index);
-
-    if (confidence > confidence_threshold)
-    {
-      float x_center = detectionMat.at<float>(i, 0) * image.cols;
-      float y_center = detectionMat.at<float>(i, 1) * image.rows;
-      float width = detectionMat.at<float>(i, 2) * image.cols;
-      float height = detectionMat.at<float>(i, 3) * image.rows;
-      cv::Point p1(cvRound(x_center - width / 2), cvRound(y_center - height / 2));
-      cv::Point p2(cvRound(x_center + width / 2), cvRound(y_center + height / 2));
-      cv::Rect object(p1, p2);
-      string class_name = ""; // TODO: Find class name
-      pair<string, cv::Rect> result = make_pair(class_name, object);
-      results.push_back(result);
-    }
-  }
+  net.forward(outs, outNames);
 
   return results;
 }
