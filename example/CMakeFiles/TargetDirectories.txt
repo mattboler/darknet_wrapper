@@ -1,3 +1,0 @@
-/home/matt/venom_ws/src/darknet_wrapper/example/CMakeFiles/rebuild_cache.dir
-/home/matt/venom_ws/src/darknet_wrapper/example/CMakeFiles/example.dir
-/home/matt/venom_ws/src/darknet_wrapper/example/CMakeFiles/edit_cache.dir
