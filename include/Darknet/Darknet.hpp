@@ -19,6 +19,8 @@ class Darknet
     cv::dnn::Net net;
     vector<string> classNamesVec;
     float confidence_threshold;
+    cv::Mat Preprocess(const cv::Mat& image);
+    void Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs);
 };
 
 #endif
