@@ -3,6 +3,8 @@
   <name>darknet_wrapper</name>
   <version>0.1.0</version>
   <description>Repository containing a wrapper around Darknet</description>
+  
+  <license>IDK</license>
 
   <maintainer email="meb0054@auburn.edu">Matt Boler</maintainer>
 
