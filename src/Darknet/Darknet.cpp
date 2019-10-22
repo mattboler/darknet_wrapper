@@ -69,7 +69,7 @@ cv::Mat Darknet::Preprocess(const cv::Mat& image)
 }
 
 
-vector<tuple<string, cv::Rect, int> > Darknet::Predict(const cv::Mat& image)
+vector<tuple<string, cv::Rect, double> > Darknet::Predict(const cv::Mat& image)
 {
   // Prepare image to be fed into network
   cv::Mat inputBlob = Preprocess(image);
@@ -86,15 +86,15 @@ vector<tuple<string, cv::Rect, int> > Darknet::Predict(const cv::Mat& image)
 
   vector<cv::Mat> outs;
   net.forward(outs, outNames);
-  vector<tuple<string, cv::Rect, int> > results;
+  vector<tuple<string, cv::Rect, double> > results;
   results = Postprocess(image, outs);
 
   return results;
 }
 
-vector<tuple<string, cv::Rect, int> > Darknet::Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs)
+vector<tuple<string, cv::Rect, double> > Darknet::Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs)
 {
-  vector<tuple<string, cv::Rect, int> > results;
+  vector<tuple<string, cv::Rect, double> > results;
   
   for (size_t i = 0; i < outs.size(); ++i)
   {
@@ -116,7 +116,7 @@ vector<tuple<string, cv::Rect, int> > Darknet::Postprocess(const cv::Mat& image,
 
         cv::Rect temp_rect = cv::Rect(left, top, width, height);
         string temp_name = classNamesVec[classIdPoint.x];
-        tuple<string, cv::Rect, int> temp_tuple = std::make_tuple(temp_name, temp_rect, confidence);
+        tuple<string, cv::Rect, double> temp_tuple = std::make_tuple(temp_name, temp_rect, confidence);
         results.push_back(temp_tuple);
       }
     }

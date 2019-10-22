@@ -14,13 +14,20 @@ class Darknet
     Darknet();
     Darknet(string modelConfig, string modelWeights, string modelNames);
     bool Configure(string modelConfig, string modelWeights, string modelNames);
-    vector<tuple<string, cv::Rect, int> > Predict(const cv::Mat& image);
+    vector<tuple<string, cv::Rect, double> > Predict(const cv::Mat& image);
   private:
     cv::dnn::Net net;
     vector<string> classNamesVec;
     float confidence_threshold;
     cv::Mat Preprocess(const cv::Mat& image);
-    vector<tuple<string, cv::Rect, int>> Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs);
+    vector<tuple<string, cv::Rect, double>> Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs);
 };
+
+struct Prediction {
+  std::string class_name;
+  cv::Rect box;
+  double confidence;
+};
+
 
 #endif
