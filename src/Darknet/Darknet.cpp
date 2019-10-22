@@ -4,7 +4,7 @@
 #include<fstream>
 
 #include<opencv2/core/core.hpp>
-#include<opencv2/features2d/features2d.hpp>
+#include<opencv2/features2d/features2d.hpp> 
 #include<opencv2/dnn.hpp>
 #include<opencv2/imgproc.hpp>
 #include "Darknet/Darknet.hpp"
@@ -69,7 +69,7 @@ cv::Mat Darknet::Preprocess(const cv::Mat& image)
 }
 
 
-vector<pair<string, cv::Rect> > Darknet::Predict(const cv::Mat& image)
+vector<tuple<string, cv::Rect, int> > Darknet::Predict(const cv::Mat& image)
 {
   // Prepare image to be fed into network
   cv::Mat inputBlob = Preprocess(image);
@@ -78,23 +78,23 @@ vector<pair<string, cv::Rect> > Darknet::Predict(const cv::Mat& image)
   net.setInput(inputBlob, "data");
 
   // Run the network
-  std::vector<cv::String> outNames = net.getUnconnectedOutLayersNames();
-  std::vector<int> outLayers = net.getUnconnectedOutLayers();
-  std::string outLayerType = net.getLayer(outLayers[0])->type;
+  vector<cv::String> outNames = net.getUnconnectedOutLayersNames();
+  vector<int> outLayers = net.getUnconnectedOutLayers();
+  string outLayerType = net.getLayer(outLayers[0])->type;
   std::cout << "Type: " << outLayerType << std::endl;
 
 
-  std::vector<cv::Mat> outs;
+  vector<cv::Mat> outs;
   net.forward(outs, outNames);
-  std::vector<std::pair<std::string, cv::Rect>> results;
+  vector<tuple<string, cv::Rect, int> > results;
   results = Postprocess(image, outs);
 
   return results;
 }
 
-std::vector<std::pair<std::string, cv::Rect>> Darknet::Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs)
+vector<tuple<string, cv::Rect, int> > Darknet::Postprocess(const cv::Mat& image, const vector<cv::Mat>& outs)
 {
-  std::vector<std::pair<std::string, cv::Rect>> results;
+  vector<tuple<string, cv::Rect, int> > results;
   
   for (size_t i = 0; i < outs.size(); ++i)
   {
@@ -115,9 +115,9 @@ std::vector<std::pair<std::string, cv::Rect>> Darknet::Postprocess(const cv::Mat
         int top = centerY - height / 2;
 
         cv::Rect temp_rect = cv::Rect(left, top, width, height);
-        std::string temp_name = classNamesVec[classIdPoint.x];
-        std::pair<std::string, cv::Rect> temp_pair = std::make_pair(temp_name, temp_rect);
-        results.push_back(temp_pair);
+        string temp_name = classNamesVec[classIdPoint.x];
+        tuple<string, cv::Rect, int> temp_tuple = std::make_tuple(temp_name, temp_rect, confidence);
+        results.push_back(temp_tuple);
       }
     }
   }

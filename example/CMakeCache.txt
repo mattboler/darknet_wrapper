@@ -191,10 +191,7 @@ darknet_example_BINARY_DIR:STATIC=/home/matt/venom_ws/src/darknet_wrapper/exampl
 darknet_example_SOURCE_DIR:STATIC=/home/matt/venom_ws/src/darknet_wrapper/example
 
 //The directory containing a CMake configuration file for darknet_wrapper.
-darknet_wrapper_DIR:PATH=/home/matt/venom_ws/install/darknet_wrapper/share/darknet_wrapper/cmake
-
-//Path to a library.
-lib:FILEPATH=/home/matt/venom_ws/install/darknet_wrapper/lib/libdarknet_wrapper.so
+darknet_wrapper_DIR:PATH=darknet_wrapper_DIR-NOTFOUND
 
 
 ########################

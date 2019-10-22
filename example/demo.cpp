@@ -23,7 +23,14 @@ int main(int argc, char** argv)
   Darknet net = Darknet();
   net.Configure(modelConfig, modelWeights, modelNames);
 
-  net.Predict(image);
+  std::vector<std::tuple<std::string, cv::Rect, int> > output = 
+    net.Predict(image);
+  
+  for (std::tuple<std::string, cv::Rect, int> result : output)
+  {
+    // Do a thing
+    std::cout << "Detection type: " << std::get<0>(result) << std::endl;
+  }
 
 
   return 0;
