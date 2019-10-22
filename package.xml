@@ -1,37 +1,13 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>darknet_wrapper</name>
-  <version>0.0.0</version>
+  <version>0.1.0</version>
   <description>Repository containing a wrapper around Darknet</description>
 
   <maintainer email="meb0054@auburn.edu">Matt Boler</maintainer>
 
-  <license>Open Source</license>
-
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
-
-  <build_depend>is4s_common</build_depend>
-  <exec_depend>is4s_common</exec_depend>
-
-  <build_depend>roscpp</build_depend>
-  <exec_depend>roscpp</exec_depend>
-  
-  <build_depend>cv_bridge</build_depend>
-  <exec_depend>cv_bridge</exec_depend>
-
-  <build_depend>std_msgs</build_depend>
-  <exec_depend>std_msgs</exec_depend>
-
-  <build_depend>sensor_msgs</build_depend>
-  <exec_depend>sensor_msgs</exec_depend>
-
-  <build_depend>std_srvs</build_depend>
-  <exec_depend>std_srvs</exec_depend>
-
-  <build_depend>tf2_ros</build_depend>
-  <exec_depend>tf2_ros</exec_depend>
-
 
   <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
 
