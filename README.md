@@ -10,6 +10,7 @@ Use is as follows:
 
 net = Darknet(modelConfig, modelWeights, modelNames);
 
-std::vector<std::pair<std::string, cv::Rect> > results = net.Predict(image);
+// Predictions are of form <ClassName, BoundingBox, Confidence>
+std::vector<std::tuple<std::string, cv::Rect, double> > results = net.Predict(image);
 ```
 
